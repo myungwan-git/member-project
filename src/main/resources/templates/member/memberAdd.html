@@ -1,0 +1,36 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+  .body { width: 90%; }
+  form > section { display: flex; padding-bottom: 4em;}
+  .spaceIndent {display: block; width: 5em; text-align: center;}
+  .title { font-size: 2rem; font-weight: bold; text-align: center;}
+</style>
+<body>
+  <p class="title">Hello, Member Join Page</p>
+
+  <h2>Please check this . </h2>
+
+  <form action="/member/add" th:action th:object="${member}" method="post">
+    <section>
+      <span class="spaceIndent">ID : </span> <input type="text" th:field="*{id}" placeholder="Please Note ID"/>
+    </section>
+    <section>
+      <span class="spaceIndent">Password : </span> <input type="password" th:field="*{password}" placeholder="Please Note Password"/>
+    </section>
+    <section>
+      <span class="spaceIndent">Nickname : </span> <input type="text" th:field="*{nickname}" placeholder="Please Note Nickname"/>
+    </section>
+    <section>
+      <span class="spaceIndent">Age : </span> <input type="text" th:field="*{age}" placeholder="Please Note age"/>
+    </section>
+    <button onclick="location.href='/member/add'" type="submit">Sign UP Complete</button>
+  </form>
+</body>
+</html>

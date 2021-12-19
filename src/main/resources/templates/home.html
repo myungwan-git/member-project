@@ -1,0 +1,26 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+
+<style>
+  .title {text-align: center; font-size: 2.5rem; font-weight: bold;}
+  .signBtn {display: flex; justify-content: space-around; }
+  .signBtn > button { width: 30%; height: 3em; }
+</style>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<p class="title">This is main page . </p>
+
+<h2 class="title">Please Click button</h2>
+<section class="signBtn">
+  <button onclick ="location.href='/member/add'" th:onclick="|location.href='@{/member/add}'|">Sign UP</button>
+  <button>Sign IN</button>
+</section>
+
+
+</body>
+</html>
