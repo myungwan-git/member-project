@@ -11,6 +11,8 @@
   form > section { display: flex; padding-bottom: 4em;}
   .spaceIndent {display: block; width: 5em; text-align: center;}
   .title { font-size: 2rem; font-weight: bold; text-align: center;}
+  .error-class { color: red; font-weight: bold; }
+  input { margin-right: 2em; }
 </style>
 <body>
   <p class="title">Hello, Member Join Page</p>
@@ -18,17 +20,24 @@
   <h2>Please check this . </h2>
 
   <form action="/member/add" th:action th:object="${member}" method="post">
+    <div th:if="${#fields.hasGlobalErrors()}">
+      <p th:each="err : ${#fields.hasGlobalErrors()}" th:text="${err}" class="error-class">전체 오류 메시지</p>
+    </div>
     <section>
       <span class="spaceIndent">ID : </span> <input type="text" th:field="*{id}" placeholder="Please Note ID"/>
+      <p class="error-class" th:errors="*{id}">ID 오류</p>
     </section>
     <section>
       <span class="spaceIndent">Password : </span> <input type="password" th:field="*{password}" placeholder="Please Note Password"/>
+      <p class="error-class" th:errors="*{password}">Password 오류</p>
     </section>
     <section>
       <span class="spaceIndent">Nickname : </span> <input type="text" th:field="*{nickname}" placeholder="Please Note Nickname"/>
+      <p class="error-class" th:errors="*{nickname}">Nickname 오류</p>
     </section>
     <section>
       <span class="spaceIndent">Age : </span> <input type="text" th:field="*{age}" placeholder="Please Note age"/>
+      <p class="error-class" th:errors="*{age}">Age 오류</p>
     </section>
     <button onclick="location.href='/member/add'" type="submit">Sign UP Complete</button>
   </form>

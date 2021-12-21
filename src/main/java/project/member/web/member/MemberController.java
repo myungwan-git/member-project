@@ -22,6 +22,7 @@ public class MemberController {
 
   @PostMapping("/member/add")
   public String memberAdd(@Validated @ModelAttribute Member member, BindingResult bindingResult, Model model) {
+    bindingResult.reject("global", new Object[]{""});
     if (bindingResult.hasErrors()) {
       log.error(" >>> BindingResult ERROR = {}", bindingResult);
 
