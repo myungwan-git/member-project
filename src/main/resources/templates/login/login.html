@@ -1,0 +1,32 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login Page</title>
+</head>
+<style>
+  body { width: 70%; margin: 0 auto; margin-top: 4em;}
+  .title { font-size: 4vw; text-align: center; }
+  .description { font-size: 3vw; text-align: center; color: blue; }
+  .sign {margin-top: 3em; font-size: 3vw; }
+  .sign > section { display: flex; padding-bottom: 2em; justify-content: center;}
+  .spaceIndent { display: block; width: 7em; text-align: center; }
+</style>
+<body>
+  <p class="title">This page is Sign in Page.</p>
+  <p class="description">Please enter the ID and Password</p>
+
+  <article class="sign">
+    <section>
+      <span class="spaceIndent">ID : </span> <input type="text" placeholder="Please Note ID"/>
+    </section>
+    <section>
+      <span class="spaceIndent">Password : </span> <input type="password" placeholder="Please Note Password"/>
+    </section>
+  </article>
+
+</body>
+</html>

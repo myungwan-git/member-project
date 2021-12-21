@@ -21,7 +21,7 @@
 
   <form action="/member/add" th:action th:object="${member}" method="post">
     <div th:if="${#fields.hasGlobalErrors()}">
-      <p th:each="err : ${#fields.hasGlobalErrors()}" th:text="${err}" class="error-class">전체 오류 메시지</p>
+      <p class="error-class" th:each="err : ${#fields.globalErrors()}" th:text="${err}">글로벌 오류 메시지</p>
     </div>
     <section>
       <span class="spaceIndent">ID : </span> <input type="text" th:field="*{id}" placeholder="Please Note ID"/>
@@ -38,6 +38,10 @@
     <section>
       <span class="spaceIndent">Age : </span> <input type="text" th:field="*{age}" placeholder="Please Note age"/>
       <p class="error-class" th:errors="*{age}">Age 오류</p>
+    </section>
+    <section>
+      <span class="spaceIndent">Value : </span> <input type="text" th:field="*{value}" placeholder="Please Note value"/>
+      <p class="error-class" th:errors="*{value}">Value 오류</p>
     </section>
     <button onclick="location.href='/member/add'" type="submit">Sign UP Complete</button>
   </form>

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
@@ -21,6 +22,7 @@ public class MemberRepository {
     member.setIdx(++seq);
     store.put(member.getIdx(), member);
 
+    log.info(" >>> Insert member = {}", member);
     return member;
   }
 
@@ -29,6 +31,18 @@ public class MemberRepository {
 
     Member member = store.get(idx);
     return member;
+  }
+
+  public Optional<Member> findByLoginId(String id) {
+    log.info(" >>> Member findByLoginId() Execute !!");
+
+    List<Member> findAllMember = findAll();
+    for (Member member : findAllMember) {
+      if (member.getId().equals(id)) {
+        return Optional.of(member);
+      }
+    }
+    return Optional.empty();
   }
 
   public List<Member> findAll() {
