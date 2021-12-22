@@ -11,22 +11,30 @@
   body { width: 70%; margin: 0 auto; margin-top: 4em;}
   .title { font-size: 4vw; text-align: center; }
   .description { font-size: 3vw; text-align: center; color: blue; }
-  .sign {margin-top: 3em; font-size: 3vw; }
+  .sign {margin-top: 3em; font-size: 3vw; text-align: center;}
   .sign > section { display: flex; padding-bottom: 2em; justify-content: center;}
   .spaceIndent { display: block; width: 7em; text-align: center; }
+  .loginSubmit { padding: 2em; }
+  .error-class { font-size: 2vw; color: red; letter-spacing: -1px;}
 </style>
 <body>
   <p class="title">This page is Sign in Page.</p>
   <p class="description">Please enter the ID and Password</p>
 
-  <article class="sign">
+  <form class="sign" th:object="${login}" action="/login" th:action method="post">
+    <div th:if="${#fields.hasGlobalErrors()}">
+      <p class="error-class" th:each="err : ${#fields.globalErrors()}" th:text="${err}">로그인 실패 오류 메시지</p>
+    </div>
     <section>
-      <span class="spaceIndent">ID : </span> <input type="text" placeholder="Please Note ID"/>
+      <span class="spaceIndent">ID : </span> <input type="text" th:field="*{id}" placeholder="Please Note ID"/>
+      <p class="error-class" th:errors="*{id}">ID 오류</p>
     </section>
     <section>
-      <span class="spaceIndent">Password : </span> <input type="password" placeholder="Please Note Password"/>
+      <span class="spaceIndent">Password : </span> <input type="password" th:field="*{password}" placeholder="Please Note Password"/>
+      <p class="error-class" th:errors="*{password}">Password 오류</p>
     </section>
-  </article>
+    <button class="loginSubmit" type="submit">Login</button>
+  </form>
 
 </body>
 </html>

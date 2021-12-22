@@ -40,6 +40,6 @@ public class MemberController {
     //정상 로직 ( Validation 종류 후 실행되는 정상 로직 )
     memberRepository.save(member);
 
-    return "home";
+    return "redirect:/";
   }
 }
