@@ -33,6 +33,6 @@ public class loginController {
       return "login/login";
     }
 
-    return "/"
+    return "redirect:/";
   }
 }
