@@ -13,6 +13,9 @@ import project.member.domain.login.LoginService;
 import project.member.domain.member.Member;
 import project.member.domain.member.MemberRepository;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 @Slf4j
 @Controller
 @RequiredArgsConstructor
@@ -28,22 +31,24 @@ public class loginController {
   }
 
   @PostMapping("/login")
-  public String loginValidation(@Validated @ModelAttribute Login login, BindingResult bindingResult) {
+  public String loginValidation(@Validated @ModelAttribute Login login, BindingResult bindingResult, HttpServletResponse response) {
     log.info(" >>> login Validation 실행 !!");
 
     if (bindingResult.hasErrors()) {
       log.error(" >>> login BindingResult ERROR = {}", bindingResult);
-
       return "login/login";
     }
 
     Member member = loginService.login(login.getId(), login.getPassword());
     if (member == null) {
       log.error(" >>> login ID or Password ERROR ID = {}", login.getId());
-
       bindingResult.reject("loginGlobalError",null);
       return "login/login";
     }
+
+    Cookie cookie = new Cookie("memberIdx", String.valueOf(member.getIdx()));
+    response.addCookie(cookie);
+    log.info(" >>> Cookie 생성 성공 !! Cookie name = {} ", cookie.getName());
     log.info(" >>> 로그인 성공 !! ID = {}", login.getId());
     return "redirect:/";
   }
