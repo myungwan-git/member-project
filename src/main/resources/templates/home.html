@@ -4,6 +4,9 @@
   .title {text-align: center; font-size: 2.5rem; font-weight: bold;}
   .signBtn {display: flex; justify-content: space-around; }
   .signBtn > button { width: 30%; height: 3em; }
+  .signBtn > form { width: 30%; height: 3em;}
+  .signBtn > form > button{ width: 100%; height: 100%;}
+  .loginUser { text-align: center; font-size: 2rem; color: blue; }
 </style>
 
 <head>
@@ -16,9 +19,22 @@
 <p class="title">This is main page . </p>
 
 <h2 class="title">Please Click button</h2>
+<!--
+기존 강의에서는 "홈화면"과 "로그인성공시 홈화면"을 나눠놓았다. 디자인이 바뀌지 않는다면 굳이 그럴 이유가 있을까?
+유지보수의 편리함을 위해? 명확함을 위해? 나누는게 깔끔할거 같다.
+-->
+<h3 th:if="${memberNickname}" class="loginUser" th:text="|안녕하세요. ${memberNickname} 님|">로그인한 유저 닉네임</h3>
 <section class="signBtn">
   <button onclick ="location.href='/member/add'" th:onclick="|location.href='@{/member/add}'|">Sign UP</button>
-  <button onclick="location.href='/login'" th:onclick="|location.href='@{login}'|">Sign IN</button>
+  <th:block th:if="${memberNickname}==null">
+    <button onclick="location.href='/login'" th:onclick="|location.href='@{login}'|">Sign IN</button>
+  </th:block>
+  <th:block th:unless="${memberNickname}==null">
+    <form action="/logout" th:action="@{/logout}" method="post">
+      <button onclick="location.href='/logout'" type="submit">Sign OUT</button>
+    </form>
+  </th:block>
+
 </section>
 
 
