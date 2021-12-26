@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import project.member.domain.login.Login;
 import project.member.domain.login.LoginService;
 import project.member.domain.member.Member;
-import project.member.domain.member.MemberRepository;
 import project.member.web.cookie.CookieConfig;
+import project.member.web.session.SessionConfig;
 
-import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Controller
@@ -24,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 public class loginController {
 
   private final LoginService loginService;
-  private final CookieConfig cookieConfig;
+//  private final CookieConfig cookieConfig;
 
   @GetMapping("/login")
   public String login(@ModelAttribute Login login) {
@@ -33,7 +34,7 @@ public class loginController {
   }
 
   @PostMapping("/login")
-  public String loginValidation(@Validated @ModelAttribute Login login, BindingResult bindingResult, HttpServletResponse response) {
+  public String loginValidation(@Validated @ModelAttribute Login login, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
     log.info(" >>> login Validation 실행 !!");
 
     if (bindingResult.hasErrors()) {
@@ -48,9 +49,9 @@ public class loginController {
       return "login/login";
     }
 
-//    Cookie cookie = new Cookie("memberIdx", String.valueOf(member.getIdx()));
-//    response.addCookie(cookie);
-    cookieConfig.cookieCreate(member, response);
+//    cookieConfig.cookieCreate(member, response);
+    HttpSession session = request.getSession();
+    session.setAttribute(SessionConfig.LOGIN_SESSION_MEMBER, member);
 
 
     log.info(" >>> 로그인 성공 !! ID = {}", login.getId());
@@ -58,15 +59,14 @@ public class loginController {
   }
 
   @PostMapping("/logout")
-  public String logout(@CookieValue(name = "memberIdx", required = false) Long memberIdx, HttpServletResponse response) {
-    log.info(" >>> logout 클릭 !! Cookie(memberIdx) = {} ", memberIdx);
+  public String logout(HttpServletRequest request) {
 
-    if (memberIdx == null) {
-      log.info(" >>> logout 버튼이 노출되었는데 Cookie값이 없다. 브라우저에서 임의로 바꾼건가? 확인 필요 !!");
-      return "home";
+    HttpSession session = request.getSession(false);
+    log.info(" >>> logout 클릭 !! session = {} ", session);
+    if (session != null) {
+      session.invalidate();
     }
 
-    cookieConfig.cookieDelete("memberIdx", response);
     return "redirect:/";
   }
 }

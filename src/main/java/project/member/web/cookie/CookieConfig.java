@@ -14,7 +14,6 @@ public class CookieConfig {
 
   public void cookieCreate(Member member, HttpServletResponse response) {
     Long idx = member.getIdx();
-//    String uuid = UUID.randomUUID().toString();
     Cookie cookie = new Cookie("memberIdx", String.valueOf(idx));
     response.addCookie(cookie);
 
