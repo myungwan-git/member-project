@@ -27,7 +27,7 @@ public class MemberController {
   }
 
   @PostMapping("/member/add")
-  public String memberAdd(@Validated @ModelAttribute Member member, BindingResult bindingResult, Model model) {
+  public String memberAdd(@Validated @ModelAttribute Member member, BindingResult bindingResult) {
 
     if ( (member.getAge() != null) && (member.getValue() != null) && (member.getAge() * member.getValue() < 3000) ) {
       bindingResult.reject("globalValueError", new Object[]{member.getAge()*member.getValue(),3000},null);
