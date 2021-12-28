@@ -17,8 +17,8 @@ public class TestDataInjection {
 
   @PostConstruct
   public void init() {
-    Member member1 = new Member(1L,"test","test1","im test",30,500);
-    Member member2 = new Member(2L,"test2","test2","im test2",30,500);
+    Member member1 = new Member(1L,"testa","test1","im testA",30,500);
+    Member member2 = new Member(2L,"testb","test2","im testB",30,500);
     memberRepository.save(member1);
     memberRepository.save(member2);
   }

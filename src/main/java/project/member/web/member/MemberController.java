@@ -9,24 +9,28 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import project.member.domain.member.Member;
 import project.member.domain.member.MemberRepository;
+
+import java.util.List;
 
 @Slf4j
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/member")
 public class MemberController {
 
   //@RequiredArgsConstructor를 통한 생성자 생성 ( 생성자가 1개라 자동으로 @AutoWired )
   private final MemberRepository memberRepository;
 
-  @GetMapping("/member/add")
+  @GetMapping("/add")
   public String memberAddView(@ModelAttribute Member member) {
     log.info(" >>> 회원가입 폼 진입");
     return "/member/memberAdd";
   }
 
-  @PostMapping("/member/add")
+  @PostMapping("/add")
   public String memberAdd(@Validated @ModelAttribute Member member, BindingResult bindingResult) {
 
     if ( (member.getAge() != null) && (member.getValue() != null) && (member.getAge() * member.getValue() < 3000) ) {
@@ -42,4 +46,15 @@ public class MemberController {
 
     return "redirect:/";
   }
+
+  @GetMapping("/list")
+  public String memberList(Model model) {
+    log.info(" >>> member List 출력 - memberList()");
+
+    List<Member> memberFindAll = memberRepository.findAll();
+    model.addAttribute("members", memberFindAll);
+
+    return "/member/memberList";
+  }
+
 }
