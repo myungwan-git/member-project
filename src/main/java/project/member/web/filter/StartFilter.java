@@ -12,11 +12,6 @@ import java.util.UUID;
 public class StartFilter implements Filter {
 
   @Override
-  public void init(FilterConfig filterConfig) throws ServletException {
-
-  }
-
-  @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
     String uuid = UUID.randomUUID().toString();
 
@@ -30,8 +25,4 @@ public class StartFilter implements Filter {
     }
   }
 
-  @Override
-  public void destroy() {
-
-  }
 }

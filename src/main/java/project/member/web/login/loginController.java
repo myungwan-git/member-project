@@ -5,10 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import project.member.domain.login.Login;
 import project.member.domain.login.LoginService;
 import project.member.domain.member.Member;
@@ -34,7 +31,9 @@ public class loginController {
   }
 
   @PostMapping("/login")
-  public String loginValidation(@Validated @ModelAttribute Login login, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+  public String loginValidation(@Validated @ModelAttribute Login login, BindingResult bindingResult, //
+                                @RequestParam(name = "redirectURL", required = false, defaultValue = "/") String redirectURL, //
+                                HttpServletRequest request, HttpServletResponse response) {
     log.info(" >>> login Validation 실행 !!");
 
     if (bindingResult.hasErrors()) {
@@ -53,9 +52,8 @@ public class loginController {
     HttpSession session = request.getSession();
     session.setAttribute(SessionConfig.LOGIN_SESSION_MEMBER, member);
 
-
     log.info(" >>> 로그인 성공 !! ID = {}", login.getId());
-    return "redirect:/";
+    return "redirect:" + redirectURL;
   }
 
   @PostMapping("/logout")
