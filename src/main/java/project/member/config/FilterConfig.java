@@ -8,7 +8,7 @@ import project.member.web.filter.StartFilter;
 
 import javax.servlet.Filter;
 
-@Configuration
+//@Configuration
   public class FilterConfig {
 
   @Bean

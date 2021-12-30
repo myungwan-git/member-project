@@ -57,7 +57,6 @@ public class HomeController {
     log.info(" >>> 로그인 여부 - loginSessionMember = {} ", loginSessionMember);
 
     if (loginSessionMember == null) {
-      response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Bae-Request");
       return "home";
     }
 

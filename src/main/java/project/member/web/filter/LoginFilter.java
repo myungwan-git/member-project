@@ -11,13 +11,12 @@ import java.io.IOException;
 import java.util.UUID;
 
 @Slf4j
-@Component
 public class LoginFilter implements Filter {
 
+  private final String uuid = UUID.randomUUID().toString();
 
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-    String uuid = UUID.randomUUID().toString();
     HttpServletRequest httpServletRequest = (HttpServletRequest) request;
     HttpServletResponse httpServletResponse = (HttpServletResponse) response;
     String requestURI = httpServletRequest.getRequestURI();
