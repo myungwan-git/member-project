@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.UUID;
 
 @Slf4j
-@Component
 public class StartFilter implements Filter {
 
   @Override

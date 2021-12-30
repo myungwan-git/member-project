@@ -13,6 +13,8 @@
   .title { font-size: 2rem; font-weight: bold; text-align: center;}
   .error-class { color: red; font-weight: bold; }
   input { margin-right: 2em; }
+  .btn {display: flex; justify-content: space-around; }
+  .btn > button { padding: 1em; }
 </style>
 <body>
   <p class="title">Hello, Member Join Page</p>
@@ -43,7 +45,11 @@
       <span class="spaceIndent">Value : </span> <input type="text" th:field="*{value}" placeholder="Please Note value"/>
       <p class="error-class" th:errors="*{value}">Value 오류</p>
     </section>
-    <button onclick="location.href='/member/add'" type="submit">Sign UP Complete</button>
+    <div class="btn">
+      <button onclick="location.href='/member/add'" type="submit">Sign UP Complete</button>
+      <button onclick="location.href='/'">Home</button>
+    </div>
+
   </form>
 </body>
 </html>

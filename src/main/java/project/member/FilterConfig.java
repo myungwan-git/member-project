@@ -1,4 +1,4 @@
-package project.config;
+package project.member;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -8,10 +8,10 @@ import project.member.web.filter.StartFilter;
 
 import javax.servlet.Filter;
 
-//@Configuration
+@Configuration
 public class FilterConfig extends FilterRegistrationBean {
 
-//  @Bean
+  @Bean
   public FilterRegistrationBean startFilterAdd() {
     FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
     filterRegistrationBean.setFilter(new StartFilter());
@@ -21,7 +21,7 @@ public class FilterConfig extends FilterRegistrationBean {
     return filterRegistrationBean;
   }
 
-//  @Bean
+  @Bean
   public FilterRegistrationBean loginFilterAdd() {
     FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
     filterRegistrationBean.setFilter(new LoginFilter());
