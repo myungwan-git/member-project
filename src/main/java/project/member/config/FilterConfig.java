@@ -1,4 +1,4 @@
-package project.member;
+package project.member.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +9,7 @@ import project.member.web.filter.StartFilter;
 import javax.servlet.Filter;
 
 @Configuration
-public class FilterConfig extends FilterRegistrationBean {
+  public class FilterConfig {
 
   @Bean
   public FilterRegistrationBean startFilterAdd() {
@@ -26,8 +26,10 @@ public class FilterConfig extends FilterRegistrationBean {
     FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
     filterRegistrationBean.setFilter(new LoginFilter());
     filterRegistrationBean.setOrder(2);
-    filterRegistrationBean.addUrlPatterns("/*");
+    //로그인 필터의 세션검사는 /member/list 경로에만 적용.
+    filterRegistrationBean.addUrlPatterns("/member/list");
 
     return filterRegistrationBean;
   }
+
 }

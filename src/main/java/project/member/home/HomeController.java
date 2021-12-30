@@ -13,7 +13,9 @@ import project.member.domain.member.MemberRepository;
 import project.member.web.session.SessionConfig;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @Slf4j
 @Controller
@@ -51,10 +53,11 @@ public class HomeController {
 
   @GetMapping("/")
   public String home(@SessionAttribute(name = SessionConfig.LOGIN_SESSION_MEMBER, required = false) Member loginSessionMember,
-                     HttpServletRequest request, Model model) {
+                     HttpServletRequest request, HttpServletResponse response, Model model) throws IOException{
     log.info(" >>> 로그인 여부 - loginSessionMember = {} ", loginSessionMember);
 
     if (loginSessionMember == null) {
+      response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Bae-Request");
       return "home";
     }
 
