@@ -2,6 +2,7 @@ package project.member.web.member;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.server.ResponseStatusException;
 import project.member.domain.member.Member;
 import project.member.domain.member.MemberRepository;
 
@@ -23,6 +26,15 @@ public class MemberController {
 
   //@RequiredArgsConstructor를 통한 생성자 생성 ( 생성자가 1개라 자동으로 @AutoWired )
   private final MemberRepository memberRepository;
+
+  @GetMapping("/runtime")
+  public void runtimeException() {
+    throw new RuntimeException("runtimeException !!");
+  }
+  @GetMapping("/response")
+  public void response() {
+    throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+  }
 
   @GetMapping("/add")
   public String memberAddView(@ModelAttribute Member member) {

@@ -14,7 +14,10 @@ public class InterceptorConfig implements WebMvcConfigurer {
     registry.addInterceptor(new StartInterceptor())
         .order(1)
         .addPathPatterns("/**")
-        .excludePathPatterns("/css");
+        .excludePathPatterns("/css")
+        .excludePathPatterns("/favicon.ico")
+        .excludePathPatterns("/error");
+
     registry.addInterceptor(new LoginInterceptor())
         .order(2)
         .addPathPatterns("/member/list");

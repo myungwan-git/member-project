@@ -55,7 +55,7 @@ public class HomeController {
   public String home(@SessionAttribute(name = SessionConfig.LOGIN_SESSION_MEMBER, required = false) Member loginSessionMember,
                      HttpServletRequest request, HttpServletResponse response, Model model) throws IOException{
     log.info(" >>> 로그인 여부 - loginSessionMember = {} ", loginSessionMember);
-
+    
     if (loginSessionMember == null) {
       return "home";
     }
