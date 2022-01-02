@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 import project.member.domain.member.Member;
 import project.member.domain.member.MemberRepository;
 import project.member.web.session.SessionConfig;
@@ -51,12 +48,13 @@ public class HomeController {
   }
   */
 
-  @GetMapping("/")
+  @RequestMapping("/")
   public String home(@SessionAttribute(name = SessionConfig.LOGIN_SESSION_MEMBER, required = false) Member loginSessionMember,
                      HttpServletRequest request, HttpServletResponse response, Model model) throws IOException{
     log.info(" >>> 로그인 여부 - loginSessionMember = {} ", loginSessionMember);
-    
+
     if (loginSessionMember == null) {
+      System.out.println(" ######################## ");
       return "home";
     }
 

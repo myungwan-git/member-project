@@ -25,19 +25,18 @@
 -->
 <h3 th:if="${memberNickname}" class="loginUser" th:text="|안녕하세요. ${memberNickname} 님|">로그인한 유저 닉네임</h3>
 <section class="signBtn">
-  <button onclick ="location.href='/member/add'" th:onclick="|location.href='@{/member/add}'|">Sign UP</button>
+
   <th:block th:if="${memberNickname}==null">
+    <button onclick ="location.href='/member/add'" th:onclick="|location.href='@{/member/add}'|">Sign UP</button>
     <button onclick="location.href='/login'" th:onclick="|location.href='@{login}'|">Sign IN</button>
   </th:block>
   <th:block th:unless="${memberNickname}==null">
+    <button onclick="location.href='/member/list'">Member list view</button>
     <form action="/logout" th:action="@{/logout}" method="post">
       <button onclick="location.href='/logout'" type="submit">Sign OUT</button>
     </form>
   </th:block>
-
 </section>
-
-
 
 
 </body>

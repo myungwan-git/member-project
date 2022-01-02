@@ -12,7 +12,7 @@
   .member {width: 80%; margin: 0 auto;}
   .member__list { display: flex; justify-content: space-around; border-bottom: 1px solid black;}
   .member__num { font-size: 3vw; text-align: center; }
-
+  .home { font-size: 3vw; text-align: center; font-weight: bold; padding: 0.5em;}
 </style>
 <body>
   <div class="wrap">
@@ -26,8 +26,10 @@
         </div>
         <p class="member__num" th:if="${memberStat.count}==${memberStat.size}" th:text="|회원의 총 수는 : ${memberStat.size} 명 입니다.|">memberNumber</p>
       </div>
-
     </section>
+    <div class="home">
+      <button class="home" onclick="location.href='/'">Home</button>
+    </div>
   </div>
 
 </body>

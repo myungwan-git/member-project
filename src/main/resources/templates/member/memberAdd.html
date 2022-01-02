@@ -15,6 +15,9 @@
   input { margin-right: 2em; }
   .btn {display: flex; justify-content: space-around; }
   .btn > button { padding: 1em; }
+
+  .home {text-align: right;}
+  .home__submit {padding: 0.5em; font-size: 1rem; }
 </style>
 <body>
   <p class="title">Hello, Member Join Page</p>
@@ -47,9 +50,11 @@
     </section>
     <div class="btn">
       <button onclick="location.href='/member/add'" type="submit">Sign UP Complete</button>
-      <button onclick="location.href='/'">Home</button>
     </div>
+  </form>
 
+  <form class="home" action="/" th:action="'/'" method="get">
+    <button class="home__submit" type="submit">Home</button>
   </form>
 </body>
 </html>
